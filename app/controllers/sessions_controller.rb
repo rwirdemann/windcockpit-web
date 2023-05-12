@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
   # GET /sessions/new
   def new
     @session = Session.new
+    @spots = Spot.all
   end
 
   # GET /sessions/1/edit
