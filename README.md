@@ -1,24 +1,10 @@
-# README
+# Windcockpit
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+ssh windcockpit@95.217.180.178
+cd /var/www/windcockpit/code/
+git pull
+bundle install --deployment --without development test
+bundle exec rake assets:precompile db:migrate RAILS_ENV=production
+passenger-config restart-app $(pwd)
+```Ì
