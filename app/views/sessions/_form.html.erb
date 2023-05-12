@@ -14,6 +14,7 @@
   <div>
     <%= form.label :sport, style: "display: block" %>
     <%= form.text_field :sport %>
+    <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
   </div>
 
   <div>
