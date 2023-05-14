@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_101851) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_14_063728) do
   create_table "sessions", force: :cascade do |t|
     t.string "sport"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "spot_id"
+    t.date "when"
     t.index ["spot_id"], name: "index_sessions_on_spot_id"
   end
 
