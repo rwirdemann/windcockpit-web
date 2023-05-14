@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :set_session, only: %i[ show edit update destroy ]
+  before_action :load_spots, only: %i[ new create ]
 
   # GET /sessions or /sessions.json
   def index
@@ -13,11 +14,10 @@ class SessionsController < ApplicationController
   # GET /sessions/new
   def new
     @session = Session.new
-    @spots = Spot.all
   end
 
   # GET /sessions/1/edit
-  def edit    
+  def edit
   end
 
   # POST /sessions or /sessions.json
@@ -59,14 +59,19 @@ class SessionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_session
-      @session = Session.find(params[:id])
-      @spots = Spot.all
-    end
 
-    # Only allow a list of trusted parameters through.
-    def session_params
-      params.require(:session).permit(:sport, :spot_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_session
+    @session = Session.find(params[:id])
+    @spots = Spot.all
+  end
+
+  def load_spots
+    @spots = Spot.all
+  end
+
+  # Only allow a list of trusted parameters through.
+  def session_params
+    params.require(:session).permit(:sport, :spot_id)
+  end
 end

@@ -1,9 +1,14 @@
 <p style="color: green"><%= notice %></p>
 <div id="sessions">
   <% @sessions.each do |session| %>
-    <%= render session %>
     <p>
-      <%= link_to "Show", session %>
+      <strong>
+        <%= link_to session.sport + " in " + session.spot.name, session %>
+      </strong><br>
+      Surfer: Ralf<br>
+      Friends: Carsten, Christian<br>
+      When:
+      <%= time_tag session.created_at, "data-local": "time-ago" %>
     </p>
   <% end %>
 </div>
