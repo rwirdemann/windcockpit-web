@@ -1,4 +1,5 @@
 class SpotsController < ApplicationController
+  protect_from_forgery with: :null_session
   before_action :set_spot, only: %i[ show edit update destroy ]
 
   # GET /spots or /spots.json
