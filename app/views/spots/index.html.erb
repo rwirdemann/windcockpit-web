@@ -2,11 +2,11 @@
 
 <div id="spots">
   <% @spots.each do |spot| %>
-    <%= render spot %>
     <p>
-      <%= link_to "Show", spot %>
+      <strong>
+        <%= link_to spot.name, spot %>
+      </strong><br>
+      Created: <%= time_tag spot.created_at, "data-local": "time-ago"%>
     </p>
   <% end %>
 </div>
-
-<%= link_to "New Spot", new_spot_path %>

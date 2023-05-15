@@ -8,6 +8,10 @@
     <%= session.spot.name %>
   </p>
   <p>
+    <strong>When:</strong>
+    <%= time_tag session.when %>
+  </p>
+  <p>
     <strong>Created:</strong>
     <%= time_tag session.created_at, "data-local": "time-ago"%>
   </p>

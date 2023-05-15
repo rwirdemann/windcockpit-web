@@ -1,10 +1,11 @@
 class SessionsController < ApplicationController
+  protect_from_forgery with: :null_session
   before_action :set_session, only: %i[ show edit update destroy ]
   before_action :load_spots, only: %i[ new create ]
 
   # GET /sessions or /sessions.json
   def index
-    @sessions = Session.all
+    @sessions = Session.all.order(when: :desc)
   end
 
   # GET /sessions/1 or /sessions/1.json
@@ -72,6 +73,6 @@ class SessionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def session_params
-    params.require(:session).permit(:sport, :spot_id, :when)
+    params.require(:session).permit(:sport, :spot_id, :when, :duration)
   end
 end

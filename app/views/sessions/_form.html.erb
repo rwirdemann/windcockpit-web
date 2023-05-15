@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :sport, style: "display: block" %>
-    <%= form.text_field :sport %>
+    <%= form.select :sport, %w[Wingfoiling Windsurfing Kitesurfing Kitefoilen Windfoilen] %>
   </div>
 
   <div>
@@ -24,6 +24,11 @@
   <div>
     <%= form.label :when, style: "display: block" %>
     <%= form.date_select :when %>
+  </div>
+
+  <div>
+    <%= form.label :duration, style: "display: block" %>
+    <%= form.number_field :duration %>
   </div>
 
   <div>

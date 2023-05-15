@@ -13,11 +13,10 @@
     <header>
       <h1>Windcockpit</h1>
       <nav>
-        <a href="/">Home</a>
         <%= link_to "Sessions", sessions_path %>
         <%= link_to "Spots", spots_path %>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
+        <a href="/">About</a>
+        <a href="/">Contact</a>
       </nav>
     </header>
     <main>
@@ -27,6 +26,10 @@
           sich kennen, tauschen sich aus und verabreden gemeinsame Sessions. Mit
           dem Sessionplaner kannst Du private, öffentliche oder nur Deinem Freundeskreis
           sichtbare Sessions planen.
+        </p>
+        <p>
+          <%= link_to "New Session", new_session_path %> |
+          <%= link_to "New Spot", new_spot_path %>
         </p>
       </aside>
       <%= yield %>
