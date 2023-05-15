@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Windcockpit</title>
+    <title>Wingbuddies</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,18 +11,17 @@
   </head>
   <body>
     <header>
-      <h1>Windcockpit</h1>
+      <h1>Wingbuddies</h1>
       <nav>
         <%= link_to "Sessions", sessions_path %>
         <%= link_to "Spots", spots_path %>
-        <a href="/">About</a>
-        <a href="/">Contact</a>
+        <%= link_to "About", about_path %>
       </nav>
     </header>
     <main>
-      <aside>
+      <aside id="sidebar">
         <p>
-          Windcockpit ist eine interaktive Plattform für Surfer. Surfer lernen
+          Wingbuddies ist eine interaktive Plattform für Wingsurfer. Wingsurfer lernen
           sich kennen, tauschen sich aus und verabreden gemeinsame Sessions. Mit
           dem Sessionplaner kannst Du private, öffentliche oder nur Deinem Freundeskreis
           sichtbare Sessions planen.

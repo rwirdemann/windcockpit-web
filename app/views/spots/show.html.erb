@@ -3,8 +3,6 @@
 <%= render @spot %>
 
 <div>
-  <%= link_to "Edit this spot", edit_spot_path(@spot) %> |
-  <%= link_to "Back to spots", spots_path %>
-
-  <%= button_to "Destroy this spot", @spot, method: :delete %>
+  <%= link_to "Edit", edit_spot_path(@spot) %> |
+  <%= link_to "Delete", spot_path(@spot), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
 </div>
