@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 cd /var/www/windcockpit/code
 git pull

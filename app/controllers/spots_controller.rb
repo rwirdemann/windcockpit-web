@@ -22,8 +22,16 @@ class SpotsController < ApplicationController
 
   # POST /spots or /spots.json
   def create
-    @spot = Spot.new(spot_params)
+    if Spot.exists?(name: spot_params["name"])
+      @spot = Spot.find_by_name(spot_params["name"])
+      respond_to do |format|
+        format.html { redirect_to spot_url(@spot), notice: "Spot already exists." }
+        format.json { render :show, status: :no_content, location: @spot }
+      end
+      return
+    end
 
+    @spot = Spot.new(spot_params)
     respond_to do |format|
       if @spot.save
         format.html { redirect_to spot_url(@spot), notice: "Spot was successfully created." }
@@ -47,7 +55,7 @@ class SpotsController < ApplicationController
       end
     end
   end
-
+  ''
   # DELETE /spots/1 or /spots/1.json
   def destroy
     @spot.destroy
@@ -59,13 +67,14 @@ class SpotsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_spot
-      @spot = Spot.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def spot_params
-      params.require(:spot).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_spot
+    @spot = Spot.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def spot_params
+    params.require(:spot).permit(:name)
+  end
 end
