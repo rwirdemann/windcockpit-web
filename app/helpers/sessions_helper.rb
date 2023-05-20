@@ -11,7 +11,7 @@ module SessionsHelper
 
   def formatted_distance(total_meters)
     return "" if total_meters.nil?
-    kilometer = (total_meters + 1) / 1000
+    kilometer = total_meters / 1000
     "#{kilometer} km"
   end
 
