@@ -8,4 +8,9 @@ module SessionsHelper
       t.round.to_s.rjust(2, '0')
     end.join(':')
   end
+
+  def formatted_distance(total_meters)
+    kilometer = total_meters / 1000
+    "#{kilometer} km"
+  end
 end
