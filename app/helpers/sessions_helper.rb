@@ -10,13 +10,13 @@ module SessionsHelper
   end
 
   def formatted_distance(total_meters)
+    return "" if total_meters.nil?
     kilometer = total_meters / 1000
     "#{kilometer} km"
   end
 
   def formatted_speed(speed)
+    return "" if speed.nil?
     "#{speed} km/h"
   end
-
-
 end
