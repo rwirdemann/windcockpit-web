@@ -15,7 +15,11 @@ module SessionsHelper
   end
 
   def formatted_speed(speed)
-    "#{speed} km/h"
+    unless speed.nil?
+      "#{speed} km/h"
+    else
+      ""
+    end
   end
 
 
