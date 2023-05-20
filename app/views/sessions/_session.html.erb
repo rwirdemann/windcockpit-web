@@ -20,6 +20,10 @@
     <%= formatted_distance(session.distance) %>
   </p>
   <p>
+    <strong>Max speed:</strong>
+    <%= formatted_speed(session.maxspeed) %>
+  </p>
+  <p>
     <strong>Created:</strong>
     <%= time_tag session.created_at, "data-local": "time-ago"%>
   </p>

@@ -13,4 +13,10 @@ module SessionsHelper
     kilometer = total_meters / 1000
     "#{kilometer} km"
   end
+
+  def formatted_speed(speed)
+    "#{speed} km/h"
+  end
+
+
 end
