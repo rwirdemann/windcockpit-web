@@ -73,6 +73,6 @@ class SessionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def session_params
-    params.require(:session).permit(:sport, :spot_id, :when, :duration)
+    params.require(:session).permit(:sport, :spot_id, :when, :duration, :distance, :maxspeed)
   end
 end
