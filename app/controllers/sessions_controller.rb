@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_session, only: %i[ show edit update destroy ]
   before_action :load_spots, only: %i[ new create ]
+  before_action :validate_apikey?, only: %i[ create ], :if => Proc.new {|c| c.request.format.json?}
 
   # GET /sessions or /sessions.json
   def index
@@ -74,5 +75,18 @@ class SessionsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def session_params
     params.require(:session).permit(:sport, :spot_id, :when, :duration, :distance, :maxspeed)
+  end
+
+  def validate_apikey?
+    apikey = request.headers["X-API-KEY"]
+    return head(403) if apikey.blank?
+
+    username = request["user"]
+    return head(403) if username.blank?
+
+    user = User.find_by_name(username)
+    return head(403) if user.nil?
+
+    head(403) unless user.authenticate_apikey(apikey)
   end
 end
