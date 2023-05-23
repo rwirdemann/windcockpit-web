@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Wingbuddies</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-    <%= javascript_importmap_tags %>
-  </head>
-  <body>
-    <header>
-      <h1>Wingbuddies</h1>
-      <nav>
-        <%= link_to "Sessions", sessions_path %>
-        <%= link_to "Spots", spots_path %>
-        <%= link_to "About", about_path %>
+<head>
+  <title>Wingbuddies</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+<header>
+  <h1>Wingbuddies</h1>
+  <nav>
+    <%= link_to "Sessions", sessions_path %>
+    <%= link_to "Spots", spots_path %>
+    <%= link_to "About", about_path %>
+    <% if user_signed_in? %>
+      <%= link_to "Logout", logout_path, data: {turbo_method: :delete} %>
+    <% end %>
+
       </nav>
-    </header>
-    <main>
-      <aside id="sidebar">
-        <p>
-          Wingbuddies ist eine interaktive Plattform für Wingsurfer. Wingsurfer lernen
-          sich kennen, tauschen sich aus und verabreden gemeinsame Sessions. Mit
-          dem Sessionplaner kannst Du private, öffentliche oder nur Deinem Freundeskreis
-          sichtbare Sessions planen.
-        </p>
-        <p>
-          <%= link_to "New Session", new_session_path %> |
-          <%= link_to "New Spot", new_spot_path %>
-        </p>
-      </aside>
-      <%= yield %>
-    </main>
-    <footer>
-      <p>Windcockpit.de by Ralf Wirdemann</p>
-    </footer>
-  </body>
+</header>
+<main>
+  <aside id="sidebar">
+    <p>
+      Wingbuddies ist eine interaktive Plattform für Wingsurfer. Wingsurfer lernen
+      sich kennen, tauschen sich aus und verabreden gemeinsame Sessions. Mit
+      dem Sessionplaner kannst Du private, öffentliche oder nur Deinem Freundeskreis
+      sichtbare Sessions planen.
+    </p>
+    <p>
+      <% if user_signed_in? %>
+        <%= link_to "New Session", new_session_path %> |
+        <%= link_to "New Spot", new_spot_path %>
+      <% else %>
+        <%= link_to "Login", login_path %>
+      <% end %>
+    </p>
+  </aside>
+  <%= yield %>
+</main>
+<footer>
+  <p>Windcockpit.de by Ralf Wirdemann</p>
+</footer>
+</body>
 </html>
