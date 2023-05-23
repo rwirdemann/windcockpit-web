@@ -1,6 +1,7 @@
 class SpotsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_spot, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: %i[ new edit create update destroy ], :if => Proc.new {|c| c.request.format.html?}
 
   # GET /spots or /spots.json
   def index
