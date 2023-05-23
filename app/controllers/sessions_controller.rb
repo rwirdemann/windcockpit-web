@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   before_action :set_session, only: %i[ show edit update destroy ]
   before_action :load_spots, only: %i[ new create ]
   before_action :validate_apikey?, only: %i[ create ], :if => Proc.new {|c| c.request.format.json?}
+  before_action :authenticate_user!, only: %i[ new edit create update destroy ], :if => Proc.new {|c| c.request.format.html?}
 
   # GET /sessions or /sessions.json
   def index
