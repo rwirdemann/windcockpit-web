@@ -78,10 +78,10 @@ class SessionsController < ApplicationController
   end
 
   def validate_apikey?
-    apikey = request.headers["X-API-KEY"]
+    apikey = request.headers["x-api-key"]
     return head(403) if apikey.blank?
 
-    username = request["user"]
+    username = request.headers["username"]
     return head(403) if username.blank?
 
     user = User.find_by_name(username)
