@@ -17,10 +17,9 @@
     <%= link_to "Spots", spots_path %>
     <%= link_to "About", about_path %>
     <% if user_signed_in? %>
-      <%= link_to "Logout", logout_path, data: {turbo_method: :delete} %>
+      <%= link_to "Logout", logout_path, data: { turbo_method: :delete } %>
     <% end %>
-
-      </nav>
+  </nav>
 </header>
 <main>
   <aside id="sidebar">

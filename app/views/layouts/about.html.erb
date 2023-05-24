@@ -16,6 +16,9 @@
         <%= link_to "Sessions", sessions_path %>
         <%= link_to "Spots", spots_path %>
         <%= link_to "About", about_path %>
+        <% if user_signed_in? %>
+          <%= link_to "Logout", logout_path, data: {turbo_method: :delete} %>
+        <% end %>
       </nav>
     </header>
     <main>

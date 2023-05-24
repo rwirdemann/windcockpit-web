@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
   # GET /sessions or /sessions.json
   def index
-    @sessions = Session.all.order(when: :desc)
+    @sessions = Session.all.order(when: :desc).page params[:page]
   end
 
   # GET /sessions/1 or /sessions/1.json
