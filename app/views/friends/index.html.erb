@@ -1,0 +1,7 @@
+<div id="friends">
+  <% @friends.each do |friend| %>
+    <p>
+      <%= friend.name %> <%= link_to "Invite" %>
+    </p>
+  <% end %>
+</div>
