@@ -5,7 +5,7 @@
       <strong>
         <%= link_to session.sport + " in " + session.spot.name, session %>
       </strong><br>
-      Surfer: Ralf<br>
+      Surfer: <%= session.user.name %><br>
       When: <%= time_tag session.when %>
     </p>
   <% end %>
