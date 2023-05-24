@@ -1,8 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @spot %>
-
-<div>
-  <%= link_to "Edit", edit_spot_path(@spot) %> |
-  <%= link_to "Delete", spot_path(@spot), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-</div>
+<% if user_signed_in? %>
+  <div>
+    <%= link_to "Edit", edit_spot_path(@spot) %> |
+    <%= link_to "Delete", spot_path(@spot), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  </div>
+<% end %>
