@@ -26,7 +26,11 @@ class SessionsController < ApplicationController
   # POST /sessions or /sessions.json
   def create
     @session = Session.new(session_params)
-    @session.user = current_user
+    if request.format.html?
+      @session.user = current_user
+    else
+      @session.user = @user
+    end
 
     respond_to do |format|
       if @session.save
@@ -86,9 +90,9 @@ class SessionsController < ApplicationController
     username = request.headers["username"]
     return head(403) if username.blank?
 
-    user = User.find_by_name(username)
-    return head(403) if user.nil?
+    @user = User.find_by_name(username)
+    return head(403) if @user.nil?
 
-    head(403) unless user.authenticate_apikey(apikey)
+    head(403) unless @user.authenticate_apikey(apikey)
   end
 end
