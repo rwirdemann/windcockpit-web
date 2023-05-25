@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Wingbuddies</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-    <%= javascript_importmap_tags %>
-  </head>
-  <body>
-    <header>
-      <h1>Wingbuddies</h1>
-      <nav>
-        <%= link_to "Sessions", sessions_path %>
-        <%= link_to "Spots", spots_path %>
-        <%= link_to "About", about_path %>
-        <% if user_signed_in? %>
-          <%= link_to "Logout", logout_path, data: {turbo_method: :delete} %>
-        <% end %>
-      </nav>
-    </header>
-    <main>
-      <%= yield %>
-    </main>
-    <footer>
-      <p>Windcockpit.de by Ralf Wirdemann</p>
-    </footer>
-  </body>
+<head>
+  <title>Wingbuddies</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+<header>
+  <h1>Wingbuddies</h1>
+  <nav>
+    <%= link_to "Sessions", sessions_path %>
+    <%= link_to "Spots", spots_path %>
+    <%= link_to "About", about_path %>
+    <% if user_signed_in? %>
+      <%= link_to "Logout", logout_path, data: { turbo_method: :delete } %>
+    <% else %>
+      <%= link_to "Login", login_path %>
+    <% end %>
+  </nav>
+</header>
+<main>
+  <%= yield %>
+</main>
+<footer>
+  <p>Windcockpit.de by Ralf Wirdemann</p>
+</footer>
+</body>
 </html>

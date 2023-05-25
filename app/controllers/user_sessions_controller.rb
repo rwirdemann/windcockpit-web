@@ -6,7 +6,7 @@ class UserSessionsController < ApplicationController
     if @user
       if @user.authenticate(params[:user][:password])
         login @user
-        redirect_to root_path, notice: "Signed in."
+        redirect_to root_path
       else
         flash.now[:alert] = "Incorrect name or password."
         render :new, status: :unprocessable_entity
@@ -19,7 +19,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to root_path, notice: "Signed out."
+    redirect_to root_path
   end
 
   def new
