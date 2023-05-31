@@ -1,14 +1,24 @@
 <div id="friends">
-  <strong>My Friends:</strong>
-  <% @friendships.each do |friendship| %>
-    <%= friendship.friend.name %>
-    <%= link_to "Uninvite", friend_path(friendship), data: { turbo_method: :delete } %>
+  <% unless @friendships.empty? %>
+    <h5>Friends:</h5>
+    <% @friendships.each do |friendship| %>
+      <ul>
+        <li>
+          <%= friendship.friend.name %>
+          <%= link_to "[uninvite]", friend_path(friendship), data: { turbo_method: :delete } %>
+        </li>
+      </ul>
+    <% end %>
   <% end %>
-
-  <% @users.each do |user| %>
-    <p>
-      <strong>Surfer: </strong><%= user.name %><br>
-      <%= link_to "Invite", friends_path(id: user.id), data: { turbo_method: :post } %>
-    </p>
+  <% unless @users.empty? %>
+    <h5>Not yet Friends:</h5>
+    <% @users.each do |user| %>
+      <ul>
+        <li>
+          <%= user.name %>
+          <%= link_to "[invite]", friends_path(id: user.id), data: { turbo_method: :post } %>
+        </li>
+      </ul>
+    <% end %>
   <% end %>
 </div>
