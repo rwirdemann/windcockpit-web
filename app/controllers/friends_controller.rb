@@ -1,5 +1,20 @@
 class FriendsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @friends = User.all
+    @friendships = current_user.friendships
+    @users = User.where.not(id: (@friendships.map { |f| f.friend.id } << current_user.id))
   end
+
+  def create
+    Friendship.create!(user: current_user, friend: User.find(params[:id]))
+    redirect_to friends_url
+  end
+
+  def destroy
+    friendship = Friendship.find(params[:id])
+    friendship.destroy
+    redirect_to friends_url
+  end
+
 end

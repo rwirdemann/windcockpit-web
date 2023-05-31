@@ -15,14 +15,15 @@
   <nav>
     <%= link_to "Sessions", sessions_path %>
     <%= link_to "Spots", spots_path %>
-    <%= link_to "Friends", friends_path %>
+    <% if user_signed_in? %>
+      <%= link_to "Friends", friends_path %>
+    <% end %>
     <%= link_to "About", about_path %>
     <% if user_signed_in? %>
       <%= link_to "Logout", logout_path, data: { turbo_method: :delete } %>
-      <% else %>
+    <% else %>
       <%= link_to "Login", login_path %>
-
-  <% end %>
+    <% end %>
   </nav>
 </header>
 <main>
