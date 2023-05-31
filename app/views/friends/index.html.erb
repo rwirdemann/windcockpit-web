@@ -4,7 +4,7 @@
     <% @friendships.each do |friendship| %>
       <ul>
         <li>
-          <%= friendship.friend.name %>
+          <%= friendship.friend.name %> since <%= time_tag friendship.created_at %>
           <%= link_to "[uninvite]", friend_path(friendship), data: { turbo_method: :delete } %>
         </li>
       </ul>
