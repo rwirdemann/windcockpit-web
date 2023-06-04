@@ -7,7 +7,13 @@ class SessionsController < ApplicationController
 
   # GET /sessions or /sessions.json
   def index
-    @sessions = Session.all.order(when: :desc).page params[:page]
+    if current_user.nil?
+      sessions = Session.all.order(when: :desc).where('visibility = ?', 'public')
+    else
+      sessions = Session.all.order(when: :desc).where('visibility = ? OR user_id = ?', 'public', current_user.id)
+    end
+
+    @sessions = sessions.page params[:page]
   end
 
   # GET /sessions/1 or /sessions/1.json
@@ -80,7 +86,7 @@ class SessionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def session_params
-    params.require(:session).permit(:sport, :spot_id, :when, :duration, :distance, :maxspeed)
+    params.require(:session).permit(:sport, :spot_id, :when, :duration, :distance, :maxspeed, :visibility)
   end
 
   def validate_apikey?
