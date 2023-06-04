@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_29_083521) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_04_074656) do
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "friend_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_083521) do
     t.float "duration"
     t.float "maxspeed"
     t.integer "user_id"
+    t.string "visibility", default: "private", null: false
     t.index ["spot_id"], name: "index_sessions_on_spot_id"
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
