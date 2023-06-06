@@ -19,7 +19,7 @@
           Uploaded at <%= time_tag track.created_at, "data-local": "time-ago" %> by <%= track.user.name %><br>
           Distance: <%= formatted_distance(track.distance) %>,
           Duration: <%= formatted_duration(track.duration) %>,
-          Max: <%= track.maxspeed %>
+          Max: <%= formatted_speed(track.maxspeed) %>
         </li>
       <% end %>
     </ul>
