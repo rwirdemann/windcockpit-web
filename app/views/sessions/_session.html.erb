@@ -11,24 +11,17 @@
     <strong>When:</strong>
     <%= time_tag session.when %>
   </p>
-  <p>
-    <strong>Visibility:</strong>
-    <%= session.visibility %>
-  </p>
-  <p>
-    <strong>Duration:</strong>
-    <%= formatted_duration(session.duration) %>
-  </p>
-  <p>
-    <strong>Distance:</strong>
-    <%= formatted_distance(session.distance) %>
-  </p>
-  <p>
-    <strong>Max speed:</strong>
-    <%= formatted_speed(session.maxspeed) %>
-  </p>
-  <p>
-    <strong>Created:</strong>
-    <%= time_tag session.created_at, "data-local": "time-ago"%>
-  </p>
+  <% unless session.tracks.empty? %>
+    <strong>Tracks:</strong>
+    <ul>
+      <% session.tracks.order(created_at: :desc).each do |track| %>
+        <li>
+          Uploaded at <%= time_tag track.created_at, "data-local": "time-ago" %> by <%= track.user.name %><br>
+          Distance: <%= formatted_distance(track.distance) %>,
+          Duration: <%= formatted_duration(track.duration) %>,
+          Max: <%= track.maxspeed %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

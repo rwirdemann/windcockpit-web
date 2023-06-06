@@ -6,7 +6,8 @@
       </strong><br>
       Surfer: <%= session.user.name %><br>
       Visibility: <%= session.visibility %><br>
-      When: <%= time_tag session.when %>
+      When: <%= time_tag session.when %><br>
+      Tracks: <%= session.tracks.size %>
     </p>
   <% end %>
   <%= paginate @sessions %>

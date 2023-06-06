@@ -2,8 +2,8 @@ class SessionsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_session, only: %i[ show edit update destroy ]
   before_action :load_spots, only: %i[ new create ]
-  before_action :validate_apikey?, only: %i[ create ], :if => Proc.new {|c| c.request.format.json?}
-  before_action :authenticate_user!, only: %i[ new edit create update destroy ], :if => Proc.new {|c| c.request.format.html?}
+  before_action :validate_apikey?, only: %i[ create ], :if => Proc.new { |c| c.request.format.json? }
+  before_action :authenticate_user!, only: %i[ new edit create update destroy ], :if => Proc.new { |c| c.request.format.html? }
 
   # GET /sessions or /sessions.json
   def index
@@ -31,22 +31,45 @@ class SessionsController < ApplicationController
 
   # POST /sessions or /sessions.json
   def create
-    @session = Session.new(session_params)
-    if request.format.html?
-      @session.user = current_user
+    session = creeate_or_find_session
+    if session.nil?
+      @session = Session.new(session_params)
+      if request.format.html?
+        @session.user = current_user
+      else
+        @session.user = @user
+      end
     else
-      @session.user = @user
+      @session = session
     end
 
     respond_to do |format|
       if @session.save
         format.html { redirect_to session_url(@session), notice: "Session was successfully created." }
-        format.json { render :show, status: :created, location: @session }
+        format.json {
+          track = Track.create(session_id: @session.id,
+                               user_id: @user.id,
+                               duration: session_params[:duration],
+                               distance: session_params[:distance],
+                               maxspeed: session_params[:maxspeed],
+                               tracked_at: session_params[:when],
+          )
+          if track.save
+            render :show, status: :created, location: @session
+          else
+            format.json { render json: track.errors, status: :unprocessable_entity }
+          end
+        }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @session.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def creeate_or_find_session
+    date = session_params[:when].to_date
+    Session.where(["spot_id = ? AND \"when\" = ? and user_id = ?", session_params[:spot_id], date, @user.id]).order(when: :desc).first
   end
 
   # PATCH/PUT /sessions/1 or /sessions/1.json
