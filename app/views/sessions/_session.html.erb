@@ -16,10 +16,10 @@
     <ul>
       <% session.tracks.order(created_at: :desc).each do |track| %>
         <li>
-          Uploaded at <%= time_tag track.created_at, "data-local": "time-ago" %> by <%= track.user.name %><br>
+          Uploaded: <%= time_tag track.created_at, "data-local": "time-ago" %><br>
+          Surfer: <%= track.user.name %><br>
           Distance: <%= formatted_distance(track.distance) %>,
-          Duration: <%= formatted_duration(track.duration) %>,
-          Max: <%= formatted_speed(track.maxspeed) %>
+          Duration: <%= formatted_duration(track.duration) %><br>
         </li>
       <% end %>
     </ul>
