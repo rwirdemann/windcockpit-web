@@ -6,45 +6,95 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
   <%= javascript_importmap_tags %>
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+
+          // Get all "navbar-burger" elements
+          const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+          // Add a click event on each of them
+          $navbarBurgers.forEach(el => {
+              el.addEventListener('click', () => {
+
+                  // Get the target from the "data-target" attribute
+                  const target = el.dataset.target;
+                  const $target = document.getElementById(target);
+
+                  // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                  el.classList.toggle('is-active');
+                  $target.classList.toggle('is-active');
+
+              });
+          });
+
+      });
+  </script>
 </head>
 <body>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/sessions">
+      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <%= link_to "Sessions", sessions_path, class: "navbar-item" %>
+      <%= link_to "Spots", spots_path, class: "navbar-item" %>
+      <% if user_signed_in? %>
+        <%= link_to "Plan Session", new_session_path, class: "navbar-item" %>
+        <%= link_to "New Spot", new_spot_path, class: "navbar-item" %>
+        <%= link_to "Friends", friends_path, class: "navbar-item" %>
+      <% end %>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <% if user_signed_in? %>
+            <%= link_to "Logout", logout_path, data: { turbo_method: :delete }, class: "button is-primary" %>
+          <% else %>
+            <%= link_to "Login", login_path, class: "button is-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<!--
 <header>
-  <h1>Wingbuddies</h1>
   <nav>
-    <%= link_to "Sessions", sessions_path %>
-    <%= link_to "Spots", spots_path %>
-    <% if user_signed_in? %>
-      <%= link_to "Friends", friends_path %>
-    <% end %>
-    <%= link_to "About", about_path %>
-    <% if user_signed_in? %>
-      <%= link_to "Logout", logout_path, data: { turbo_method: :delete } %>
-    <% else %>
-      <%= link_to "Login", login_path %>
-    <% end %>
+    <%#= link_to "Sessions", sessions_path %> |
+    <%#= link_to "Spots", spots_path %> |
+    <%# if user_signed_in? %>
+      <%#= link_to "Friends", friends_path %>
+    <%# end %>
+    <%# if user_signed_in? %>
+      <%#= link_to "Plan Session", new_session_path %> |
+      <%#= link_to "New Spot", new_spot_path %> |
+      <%#= link_to "Logout", logout_path, data: { turbo_method: :delete } %> |
+    <%# else %>
+      <%#= link_to "Login", login_path %> |
+    <%# end %>
+    <%#= link_to "About", about_path %>
   </nav>
 </header>
-<main>
-  <aside id="sidebar">
-    <p>
-      Wingbuddies ist eine interaktive Plattform für Wingfoiler. Mit dem <a href="/sessions/">Sessionplaner</a> kannst
-      Du öffentliche oder nur Deinem Freundeskreis sichtbare Sessions planen. Mit der Apple Watch-App kannst Du Deine
-      Sessions tracken und ins Web laden.
-    </p>
-    <p>
-      <% if user_signed_in? %>
-        <%= link_to "Plan Session", new_session_path %> |
-        <%= link_to "New Spot", new_spot_path %>
-      <% end %>
-    </p>
-  </aside>
-  <p style="color: green"><%= notice %></p>
-  <%= yield %>
-</main>
-<footer>
-  <p>Wingbuddies.de by Ralf Wirdemann</p>
+-->
+<section class="section">
+  <div class="container">
+    <%= yield %>
+  </div>
+</section>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>Wingbuddies.de by Ralf Wirdemann</p>
+  </div>
 </footer>
 </body>
 </html>
