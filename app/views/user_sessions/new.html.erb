@@ -1,6 +1,6 @@
 <section class="section">
   <div class="container">
-    <div class="columns is-centered">
+    <div class="columns">
       <div class="column is-half">
         <%= form_with url: login_path, scope: :user do |form| %>
           <div class="field">
@@ -18,8 +18,8 @@
           <div class="control">
             <%= form.submit "Sign In", class: "button is-primary" %>
           </div>
-        <% end %>      </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>
-
