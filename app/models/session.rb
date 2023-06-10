@@ -1,5 +1,5 @@
 class Session < ApplicationRecord
-  paginates_per 5
+  paginates_per 4
   validates_presence_of :sport
   belongs_to :spot
   belongs_to :user
