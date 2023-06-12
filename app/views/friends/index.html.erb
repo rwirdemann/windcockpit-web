@@ -1,24 +1,28 @@
-<div id="friends">
-  <% unless @friendships.empty? %>
-    <h5>Friends:</h5>
+<div id="friends" class="columns">
+  <div class="column">
+    <h2 class="subtitle">Friends</h2>
     <% @friendships.each do |friendship| %>
-      <ul>
-        <li>
-          <%= friendship.friend.name %> since <%= time_tag friendship.created_at %>
-          <%= link_to "[uninvite]", friend_path(friendship), data: { turbo_method: :delete } %>
-        </li>
-      </ul>
+      <span class="columns">
+        <div class="column">
+          <strong><%= friendship.friend.name %></strong>
+        </div>
+        <div class="column">
+          <%= link_to "Uninvite", friend_path(friendship), data: { turbo_method: :delete } %>
+        </div>
+      </span>
     <% end %>
-  <% end %>
-  <% unless @users.empty? %>
-    <h5>Not yet Friends:</h5>
+  </div>
+  <div class="column">
+    <h2 class="subtitle">Not yet Friends:</h2>
     <% @users.each do |user| %>
-      <ul>
-        <li>
-          <%= user.name %>
-          <%= link_to "[invite]", friends_path(id: user.id), data: { turbo_method: :post } %>
-        </li>
-      </ul>
+      <div class="columns">
+        <div class="column">
+          <strong><%= user.name %></strong>
+        </div>
+        <div class="column">
+          <%= link_to "Invite", friends_path(id: user.id), data: { turbo_method: :post } %>
+        </div>
+      </div>
     <% end %>
-  <% end %>
+  </div>
 </div>
