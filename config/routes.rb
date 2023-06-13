@@ -2,9 +2,14 @@ Rails.application.routes.draw do
   get "/about", to: "about#index"
   get "/friends", to: "friends#index"
   resources :spots
-  resources :sessions
+  resources :sessions do
+    collection do
+      post :index
+    end
+  end
+
   resources :friends
-  root "sessions#index"
+  root "application#index"
 
   #  delete "/friends/:id", to: "friends#destroy"
   # post "friends", to: "friends#create"

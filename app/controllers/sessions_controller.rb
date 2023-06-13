@@ -13,7 +13,12 @@ class SessionsController < ApplicationController
       sessions = Session.all.order(when: :desc).where('visibility = ? OR user_id = ?', 'public', current_user.id)
     end
 
-    @sessions = sessions.page params[:page]
+    @pagy, @sessions = pagy_countless(sessions, items: 5)
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
   end
 
   # GET /sessions/1 or /sessions/1.json

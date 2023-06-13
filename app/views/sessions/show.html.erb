@@ -1,4 +1,30 @@
-<%= render @session %>
+<div id="<%= dom_id @session %>">
+  <p>
+    <strong>Sport:</strong>
+    <%= @session.sport %>
+  </p>
+  <p>
+    <strong>Spot:</strong>
+    <%= @session.spot.name %>
+  </p>
+  <p>
+    <strong>When:</strong>
+    <%= time_tag @session.when %>
+  </p>
+  <% unless @session.tracks.empty? %>
+    <strong>Tracks:</strong>
+    <ul>
+      <% @session.tracks.order(created_at: :desc).each do |track| %>
+        <li>
+          Uploaded: <%= time_tag track.created_at, "data-local": "time-ago" %><br>
+          Surfer: <%= track.user.name %><br>
+          Distance: <%= formatted_distance(track.distance) %>,
+          Duration: <%= formatted_duration(track.duration) %><br>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
 <% if user_signed_in? %>
   <div>
     <%= link_to "Edit", edit_session_path(@session) %> |

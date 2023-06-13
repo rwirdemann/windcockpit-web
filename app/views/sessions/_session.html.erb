@@ -1,27 +1,36 @@
-<div id="<%= dom_id session %>">
-  <p>
-    <strong>Sport:</strong>
-    <%= session.sport %>
-  </p>
-  <p>
-    <strong>Spot:</strong>
-    <%= session.spot.name %>
-  </p>
-  <p>
-    <strong>When:</strong>
-    <%= time_tag session.when %>
-  </p>
-  <% unless session.tracks.empty? %>
-    <strong>Tracks:</strong>
-    <ul>
-      <% session.tracks.order(created_at: :desc).each do |track| %>
-        <li>
-          Uploaded: <%= time_tag track.created_at, "data-local": "time-ago" %><br>
-          Surfer: <%= track.user.name %><br>
-          Distance: <%= formatted_distance(track.distance) %>,
-          Duration: <%= formatted_duration(track.duration) %><br>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+<div class="box" id="<%= dom_id session %>">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <%= image_tag "1024.png" %>
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong>
+
+            <%= link_to "#{session.id}: #{session.sport} in #{session.spot.name} by #{session.user.name}", session %>
+          </strong>
+          <br>
+          <%= time_tag session.when %><br>
+          Friends: Carsten, Christian, Till
+        </p>
+      </div>
+      <nav class="level is-mobile">
+        <div class="level-left">
+          <a class="level-item" aria-label="retweet">
+            <span class="icon is-small">
+              <i class="fas fa-user-group" aria-hidden="true"></i>
+            </span>
+          </a>
+          <a class="level-item" aria-label="like">
+            <span class="icon is-small">
+              <i class="fas fa-heart" aria-hidden="true"></i>
+            </span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </article>
 </div>

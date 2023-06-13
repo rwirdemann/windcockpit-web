@@ -48,8 +48,6 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'kaminari'
-
 gem "bulma-rails", "~> 0.9.4"
 gem "font-awesome-sass", "~> 6.4.0"
 
@@ -75,3 +73,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "pagy", "~> 6.0"
