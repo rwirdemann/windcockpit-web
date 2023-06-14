@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
     respond_to do |format|
       format.html # GET
       format.turbo_stream # POST
+      format.json
     end
   end
 
