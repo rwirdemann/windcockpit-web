@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "/about", to: "about#index"
   get "/friends", to: "friends#index"
   resources :spots
+  resources :users
   resources :sessions do
     collection do
       post :index
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :friends
+  resources :memberships
   root "application#index"
 
   #  delete "/friends/:id", to: "friends#destroy"

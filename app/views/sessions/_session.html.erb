@@ -9,28 +9,29 @@
       <div class="content">
         <p>
           <strong>
-
             <%= link_to "#{session.id}: #{session.sport} in #{session.spot.name} by #{session.user.name}", session %>
           </strong>
           <br>
           <%= time_tag session.when %><br>
-          Friends: Carsten, Christian, Till
+          <% unless session.users.empty? %>
+            Joined by:
+            <% session.memberships.each do |member| %>
+              <%= member.user.name %>
+            <% end %>
+          <% end %>
         </p>
       </div>
-      <nav class="level is-mobile">
+      <% if user_signed_in? %>
         <div class="level-left">
-          <a class="level-item" aria-label="retweet">
-            <span class="icon is-small">
-              <i class="fas fa-user-group" aria-hidden="true"></i>
-            </span>
-          </a>
-          <a class="level-item" aria-label="like">
-            <span class="icon is-small">
-              <i class="fas fa-heart" aria-hidden="true"></i>
-            </span>
-          </a>
+          <nav class="level is-mobile">
+            <% if !is_owner_or_member?(session) %>
+              <%= link_to "Join", memberships_path(session_id: session.id), data: { turbo_method: :post } %>
+            <% elsif !is_owner?(session) %>
+              <%= link_to "Leave", membership_path(current_membership(session)), data: { turbo_method: :delete } %>
+            <% end %>
+          </nav>
         </div>
-      </nav>
+      <% end %>
     </div>
   </article>
 </div>

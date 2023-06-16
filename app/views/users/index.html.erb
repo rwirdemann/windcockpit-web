@@ -1,0 +1,6 @@
+<h1 class="title">Hello, <%= current_user.name %></h1>
+
+<h2 class="subtitle">Sessions joined by you</h2>
+<% current_user.session_memberships.each do |session| %>
+
+<% end %>

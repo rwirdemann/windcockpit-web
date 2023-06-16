@@ -1,6 +1,11 @@
 class User < ApplicationRecord
   has_many :sessions
 
+  has_many :memberships
+  has_many :session_memberships, :through => :memberships, source: "session"
+
+  has_many :friends, through: :friendships
+
   has_many :friendships
   has_many :friends, through: :friendships
 
