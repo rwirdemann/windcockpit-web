@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
     else
       @sessions = Session.all.order(when: :desc).where('visibility = ? OR user_id = ?', 'public', current_user.id)
     end
+    @pagy, @sessions = pagy(@sessions)
 
     respond_to do |format|
       format.html # GET
