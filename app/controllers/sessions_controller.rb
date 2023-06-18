@@ -15,8 +15,7 @@ class SessionsController < ApplicationController
     @pagy, @sessions = pagy(@sessions)
 
     respond_to do |format|
-      format.html # GET
-      format.turbo_stream # POST
+      format.html
       format.json
     end
   end
