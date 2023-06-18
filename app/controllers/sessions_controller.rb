@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_session, only: %i[ show edit update destroy ]
-  before_action :load_spots, only: %i[ new create ]
+  before_action :load_spots, only: %i[ new create index ]
   before_action :validate_apikey?, only: %i[ create ], :if => Proc.new { |c| c.request.format.json? }
   before_action :authenticate_user!, only: %i[ new edit create update destroy ], :if => Proc.new { |c| c.request.format.html? }
 

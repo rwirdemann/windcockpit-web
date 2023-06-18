@@ -11,28 +11,48 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :sport, style: "display: block" %>
-    <%= form.select :sport, %w[Wingfoiling Windsurfing Kitesurfing Kitefoilen Windfoilen] %>
+  <div class="field">
+    <label class="label">Sport</label>
+    <div class="control">
+      <div class="select">
+        <%= form.select :sport, %w[Wingfoiling Windsurfing Kitesurfing Kitefoilen Windfoilen], {}, { :class => "input" } %>
+      </div>
+      <div class="select">
+        <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :spot, style: "display: block" %>
-    <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
+  <div class="field">
+    <label class="label">Spot</label>
+    <div class="control">
+      <div class="select">
+        <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :when, style: "display: block" %>
-    <%= form.date_select :when %>
+  <div class="field">
+    <label class="label">When</label>
+    <div class="control">
+      <%= form.date_field :when, class: "input" %>
+    </div>
   </div>
 
-  <div>
-    <label>Visibility</label>
-    <label><%= form.radio_button :visibility, 'private' %> Private (only friends)</label>
-    <label><%= form.radio_button :visibility, 'public' %> Public (everyone)</label>
+  <div class="field">
+    <label class="label">Visibility</label>
+
+    <div class="control">
+      <label class="radio">
+        <%= form.radio_button :visibility, 'private' %> Private
+      </label>
+      <label class="radio">
+        <%= form.radio_button :visibility, 'public' %> Public
+      </label>
+    </div>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="control">
+    <%= form.submit "Create Session", :class => "button" %>
   </div>
 <% end %>
