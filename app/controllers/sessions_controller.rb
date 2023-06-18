@@ -8,12 +8,10 @@ class SessionsController < ApplicationController
   # GET /sessions or /sessions.json
   def index
     if current_user.nil?
-      sessions = Session.all.order(when: :desc).where('visibility = ?', 'public')
+      @sessions = Session.all.order(when: :desc).where('visibility = ?', 'public')
     else
-      sessions = Session.all.order(when: :desc).where('visibility = ? OR user_id = ?', 'public', current_user.id)
+      @sessions = Session.all.order(when: :desc).where('visibility = ? OR user_id = ?', 'public', current_user.id)
     end
-
-    @pagy, @sessions = pagy_countless(sessions, items: 5)
 
     respond_to do |format|
       format.html # GET

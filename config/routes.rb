@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :friends
   resources :memberships
-  root "application#index"
+  root "sessions#index"
 
   #  delete "/friends/:id", to: "friends#destroy"
   # post "friends", to: "friends#create"

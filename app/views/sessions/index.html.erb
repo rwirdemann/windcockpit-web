@@ -5,10 +5,6 @@
         <%= render "session", session: session %>
       <% end %>
     </div>
-
-    <div id="next_link">
-      <%= button_to "Load more...", pagy_url_for(@pagy, @pagy.next), class: 'button mt-5' %>
-    </div>
   </div>
   <div class="column is-one-third">
     <%= render "form", session: Session.new %>
