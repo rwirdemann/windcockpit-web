@@ -11,7 +11,7 @@
   </div>
   <div class="column is-one-third">
     <% if user_signed_in? %>
-      <%= render "form", session: Session.new %>
+      <%= render "form", session: Session.new(when: Date.today) %>
     <% else %>
       <%= render "about" %>
     <% end %>

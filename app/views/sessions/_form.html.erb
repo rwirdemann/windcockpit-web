@@ -12,30 +12,30 @@
   <% end %>
 
   <div class="field">
-    <label class="label">What / Where</label>
-    <div class="control">
-      <div class="columns">
-        <div class="column">
-          <div class="select">
-            <%= form.select :sport, %w[Wingfoiling Windsurfing Kitesurfing Kitefoilen Windfoilen], {}, { :class => "input" } %>
-          </div>
+    <label class="label">What / When</label>
+    <div class="columns is-gapless">
+      <div class="column is-one-half">
+        <div class="select">
+          <%= form.select :sport, %w[Wingfoiling Windsurfing Kitesurfing Kitefoilen Windfoilen], {}, { :class => "input" } %>
         </div>
-        <div class="column">
-          <div class="select">
-            <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
-          </div>
-        </div>
+      </div>
+      <div class="column">
+        <%= form.date_field :when, class: "input", required: true %>
       </div>
     </div>
   </div>
 
   <div class="field">
-    <label class="label">When</label>
-    <div class="columns">
-      <div class="column is-one-half control">
-        <%= form.date_field :when, class: "input", required: true %>
+    <label class="label">Select spot or enter new one</label>
+    <div class="columns is-gapless">
+      <div class="column is-one-half">
+        <div class="select">
+          <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
+        </div>
       </div>
-      <div class="column"></div>
+      <div class="column">
+        <%= text_field_tag :spotname, {}, class: "input", placeholder: "Spotname"  %>
+      </div>
     </div>
   </div>
 
