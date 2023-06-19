@@ -3,12 +3,7 @@ Rails.application.routes.draw do
   get "/friends", to: "friends#index"
   resources :spots
   resources :users
-  resources :sessions do
-    collection do
-      post :index
-    end
-  end
-
+  resources :sessions
   resources :friends
   resources :memberships
   root "sessions#index"

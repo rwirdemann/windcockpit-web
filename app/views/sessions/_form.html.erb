@@ -1,4 +1,4 @@
-<%= form_with(model: session) do |form| %>
+<%= form_with(model: session, id: "#{dom_id(session)}_form") do |form| %>
   <% if session.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(session.errors.count, "error") %> prohibited this session from being saved:</h2>
@@ -12,39 +12,38 @@
   <% end %>
 
   <div class="field">
-    <label class="label">Sport</label>
+    <label class="label">What / Where</label>
     <div class="control">
-      <div class="select">
-        <%= form.select :sport, %w[Wingfoiling Windsurfing Kitesurfing Kitefoilen Windfoilen], {}, { :class => "input" } %>
-      </div>
-      <div class="select">
-        <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
-      </div>
-    </div>
-  </div>
-
-  <div class="field">
-    <label class="label">Spot</label>
-    <div class="control">
-      <div class="select">
-        <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
+      <div class="columns">
+        <div class="column">
+          <div class="select">
+            <%= form.select :sport, %w[Wingfoiling Windsurfing Kitesurfing Kitefoilen Windfoilen], {}, { :class => "input" } %>
+          </div>
+        </div>
+        <div class="column">
+          <div class="select">
+            <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="field">
     <label class="label">When</label>
-    <div class="control">
-      <%= form.date_field :when, class: "input" %>
+    <div class="columns">
+      <div class="column is-one-half control">
+        <%= form.date_field :when, class: "input", required: true %>
+      </div>
+      <div class="column"></div>
     </div>
   </div>
 
   <div class="field">
     <label class="label">Visibility</label>
-
     <div class="control">
       <label class="radio">
-        <%= form.radio_button :visibility, 'private' %> Private
+        <%= form.radio_button :visibility, 'private' %> Friends
       </label>
       <label class="radio">
         <%= form.radio_button :visibility, 'public' %> Public

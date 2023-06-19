@@ -13,11 +13,13 @@
           </strong>
           <br>
           <%= time_tag session.when %><br>
+          Joined by:
           <% unless session.users.empty? %>
-            Joined by:
             <% session.memberships.each do |member| %>
               <%= member.user.name %>
             <% end %>
+          <% else %>
+            no one yet
           <% end %>
         </p>
       </div>

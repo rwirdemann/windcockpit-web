@@ -10,6 +10,10 @@
     </div>
   </div>
   <div class="column is-one-third">
-    <%= render "form", session: Session.new %>
+    <% if user_signed_in? %>
+      <%= render "form", session: Session.new %>
+    <% else %>
+      <%= render "about" %>
+    <% end %>
   </div>
 </div>
