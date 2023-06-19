@@ -38,8 +38,7 @@ class SessionsController < ApplicationController
     if request.format.html?
       session = find_session(current_user.id)
       unless session.nil?
-        flash.alert = "Session existiert schon"
-        redirect_to sessions_url
+        redirect_to sessions_url, alert: "Session existiert schon"
         return
       end
     end
