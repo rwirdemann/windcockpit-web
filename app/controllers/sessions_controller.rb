@@ -35,7 +35,16 @@ class SessionsController < ApplicationController
 
   # POST /sessions or /sessions.json
   def create
-    session = creeate_or_find_session(request.format.html? ? current_user.id : @user.id)
+    if request.format.html?
+      session = find_session(current_user.id)
+      unless session.nil?
+        flash.alert = "Session existiert schon"
+        redirect_to sessions_url
+        return
+      end
+    end
+
+    session = find_session(request.format.html? ? current_user.id : @user.id)
     if session.nil?
       @session = Session.new(session_params)
       if request.format.html?
@@ -49,7 +58,7 @@ class SessionsController < ApplicationController
 
     respond_to do |format|
       if @session.save
-        format.html { redirect_to sessions_url }
+        format.html { redirect_to sessions_url, notice: "Session erfolgreich veröffentlicht"}
         format.json {
           track = Track.create(session_id: @session.id,
                                user_id: @user.id,
@@ -71,7 +80,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def creeate_or_find_session(user_id)
+  def find_session(user_id)
     date = session_params[:when].to_date
     Session.where(["spot_id = ? AND \"when\" = ? and user_id = ?", session_params[:spot_id], date, user_id]).order(when: :desc).first
   end

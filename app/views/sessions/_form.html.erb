@@ -1,18 +1,23 @@
-<%= form_with(model: session, id: "#{dom_id(session)}_form") do |form| %>
-  <% if session.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(session.errors.count, "error") %> prohibited this session from being saved:</h2>
+<h2 class="subtitle">Sessionplaner</h2>
 
-      <ul>
-        <% session.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+<p class="mb-4">
+  Plane Deine Session für einen bestimmten Tag und Spot. Deine Freunde sehen Deine
+  Sessions vom Typ <em>Friends</em>, können an diesen teilnehmen und aufgezeichnet Tracks hochladen.
+</p>
+
+<% unless flash.empty? %>
+  <% flash.each do |type, msg| %>
+    <article class="message <%= flash_class(type) %>">
+      <div class="message-body">
+        <%= msg %>
+      </div>
+    </article>
   <% end %>
+<% end %>
 
+<%= form_with(model: session, id: "#{dom_id(session)}_form") do |form| %>
   <div class="field">
-    <label class="label">What / When</label>
+    <label class="label">Was planst du an welchem Tag?</label>
     <div class="columns is-gapless">
       <div class="column is-one-half">
         <div class="select">
@@ -26,7 +31,7 @@
   </div>
 
   <div class="field">
-    <label class="label">Select spot or enter new one</label>
+    <label class="label">Bekannter oder neuer Spot?</label>
     <div class="columns is-gapless">
       <div class="column is-one-half">
         <div class="select">
@@ -34,13 +39,13 @@
         </div>
       </div>
       <div class="column">
-        <%= text_field_tag :spotname, {}, class: "input", placeholder: "Spotname"  %>
+        <%= text_field_tag :spotname, {}, class: "input", placeholder: "Spotname" %>
       </div>
     </div>
   </div>
 
   <div class="field">
-    <label class="label">Visibility</label>
+    <label class="label">Deine Session sehen nur Freunde oder alle?</label>
     <div class="control">
       <label class="radio">
         <%= form.radio_button :visibility, 'private' %> Friends
@@ -52,6 +57,10 @@
   </div>
 
   <div class="control">
-    <%= form.submit "Create Session", :class => "button" %>
+    <%= form.submit "Session einstellen", :class => "button" %>
   </div>
 <% end %>
+
+
+
+

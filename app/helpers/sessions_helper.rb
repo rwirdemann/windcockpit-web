@@ -22,4 +22,9 @@ module SessionsHelper
     speed = (speed_in_ms * 3.6).round(2)
     "#{speed} km/h"
   end
+
+  def flash_class(type)
+    return "is-danger" if type == "alert"
+    "is-success"
+  end
 end
