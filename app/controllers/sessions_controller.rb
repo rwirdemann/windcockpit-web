@@ -34,54 +34,58 @@ class SessionsController < ApplicationController
   end
 
   # POST /sessions or /sessions.json
-  def create
-    if request.format.html?
-      session = find_session(current_user.id)
-      unless session.nil?
-        redirect_to sessions_url, alert: "Session existiert schon"
-        return
-      end
+  def handle_html_create
+    @session = find_session(current_user.id)
+    unless @session.nil?
+      redirect_to sessions_url, alert: "Session existiert schon"
+      return
     end
 
-    session = find_session(request.format.html? ? current_user.id : @user.id)
-    if session.nil?
-      @session = Session.new(session_params)
-      if request.format.html?
-        @session.user = current_user
-      else
-        @session.user = @user
-      end
+    @session = Session.new(session_params)
+    @session.user = current_user
+    if @session.save
+      redirect_to sessions_url, notice: "Session erfolgreich veröffentlicht"
     else
-      @session = session
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def handle_json_create
+    @session = find_session(@user.id)
+    if @session.nil?
+      @session = Session.new(session_params)
+      @session.user = @user
+      @session.save!
     end
 
+    track = Track.create(session_id: @session.id,
+                         user_id: @user.id,
+                         duration: session_params[:duration],
+                         distance: session_params[:distance],
+                         maxspeed: session_params[:maxspeed],
+                         tracked_at: session_params[:when]
+    )
+    if track.save
+      render :show, status: :created, location: @session
+    else
+      format.json { render json: track.errors, status: :unprocessable_entity }
+    end
+  end
+
+  def create
     respond_to do |format|
-      if @session.save
-        format.html { redirect_to sessions_url, notice: "Session erfolgreich veröffentlicht"}
-        format.json {
-          track = Track.create(session_id: @session.id,
-                               user_id: @user.id,
-                               duration: session_params[:duration],
-                               distance: session_params[:distance],
-                               maxspeed: session_params[:maxspeed],
-                               tracked_at: session_params[:when],
-          )
-          if track.save
-            render :show, status: :created, location: @session
-          else
-            format.json { render json: track.errors, status: :unprocessable_entity }
-          end
-        }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @session.errors, status: :unprocessable_entity }
-      end
+      format.html {
+        handle_html_create
+      }
+      format.json {
+        handle_json_create
+      }
     end
   end
 
   def find_session(user_id)
     date = session_params[:when].to_date
-    Session.where(["spot_id = ? AND \"when\" = ? and user_id = ?", session_params[:spot_id], date, user_id]).order(when: :desc).first
+    Session.where(["spot_id = ? AND \"when\" = ? and user_id = ? and sport = ?", session_params[:spot_id], date, user_id, session_params[:sport]]).order(when: :desc).first
   end
 
   # PATCH/PUT /sessions/1 or /sessions/1.json

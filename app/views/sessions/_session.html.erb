@@ -12,6 +12,8 @@
             <%= link_to "#{session.id}: #{session.sport} in #{session.spot.name} by #{session.user.name}", session %>
           </strong>
           <br>
+          Visbility: <%= session.visibility %>
+          <br>
           <%= time_tag session.when %><br>
           Joined by:
           <% unless session.users.empty? %>

@@ -35,7 +35,8 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      <%= image_tag "logo-2.png", size: '32' %>
+      <strong class="is-size-5">Wingbuddies</strong>
     </a>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -45,11 +46,7 @@
   </div>
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <%= link_to "Sessions", sessions_path, class: "navbar-item" %>
-      <%= link_to "Spots", spots_path, class: "navbar-item" %>
       <% if user_signed_in? %>
-        <%= link_to "Plan Session", new_session_path, class: "navbar-item" %>
-        <%= link_to "New Spot", new_spot_path, class: "navbar-item" %>
         <%= link_to "Friends", friends_path, class: "navbar-item" %>
         <%= link_to "Profile", users_path, class: "navbar-item" %>
       <% end %>
