@@ -17,21 +17,23 @@
 
 <%= form_with(model: session, id: "#{dom_id(session)}_form") do |form| %>
   <div class="field">
-    <label class="label">Was planst du an welchem Tag?</label>
-    <div class="columns is-gapless">
-      <div class="column is-one-half">
+    <label class="label">Was planst Du an welchem Tag?</label>
+    <div class="control">
         <div class="select">
           <%= form.select :sport, %w[Freeride Wave Downwind], {}, { :class => "input" } %>
-        </div>
-      </div>
-      <div class="column">
-        <%= form.date_field :when, class: "input", required: true %>
       </div>
     </div>
   </div>
 
   <div class="field">
-    <label class="label">Bekannter oder neuer Spot?</label>
+    <label class="label">Was planst Du an welchem Tag?</label>
+      <div class="control">
+        <%= form.date_field :when, class: "input", required: true %>
+      </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Bekannter Spot?</label>
     <div class="columns is-gapless">
       <div class="column is-one-half">
         <div class="select">
@@ -39,8 +41,14 @@
         </div>
       </div>
       <div class="column">
-        <%= text_field_tag :spotname, {}, class: "input", placeholder: "Spotname" %>
       </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Oder neuer Spot?</label>
+    <div class="control">
+      <%= text_field_tag :spotname, {}, class: "input", placeholder: "Spotname" %>
     </div>
   </div>
 
