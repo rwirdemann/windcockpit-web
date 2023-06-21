@@ -7,29 +7,6 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
-  <script>
-      document.addEventListener('DOMContentLoaded', () => {
-
-          // Get all "navbar-burger" elements
-          const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-          // Add a click event on each of them
-          $navbarBurgers.forEach(el => {
-              el.addEventListener('click', () => {
-
-                  // Get the target from the "data-target" attribute
-                  const target = el.dataset.target;
-                  const $target = document.getElementById(target);
-
-                  // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                  el.classList.toggle('is-active');
-                  $target.classList.toggle('is-active');
-
-              });
-          });
-
-      });
-  </script>
 </head>
 <body>
 <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -38,7 +15,7 @@
       <%= image_tag "logo-2.png", size: '32' %>
       <strong class="is-size-5">Wingbuddies</strong>
     </a>
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+    <a role="button" id="burger-link" data-controller="hello" data-action="hello#greet" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>

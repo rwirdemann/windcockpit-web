@@ -1,7 +1,13 @@
-import { Controller } from "@hotwired/stimulus"
+import {Controller} from "@hotwired/stimulus"
 
 export default class extends Controller {
-  connect() {
-    this.element.textContent = "Hello World!"
-  }
+    greet() {
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+        $navbarBurgers.forEach(el => {
+            //const target = el.dataset.target;
+            const $target = document.getElementById("burger-link");
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+        });
+    }
 }
