@@ -9,7 +9,7 @@
       <div class="content">
         <p>
           <strong>
-            <%= link_to "#{session.id}: #{session.sport} in #{session.spot.name} by #{session.user.name}", session %>
+            <%= link_to "#{session.id}: #{session.sport} in #{session.spot.name} (#{session.spot.id}) by #{session.user.name}", session %>
           </strong>
           <br>
           Visbility: <%= session.visibility %>

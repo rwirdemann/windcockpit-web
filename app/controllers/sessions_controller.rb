@@ -34,24 +34,37 @@ class SessionsController < ApplicationController
   end
 
   # POST /sessions or /sessions.json
+  def find_or_create_spot(name)
+    spot = Spot.find_by_name(name)
+    return spot.nil? ? Spot.create(name: name) : spot
+  end
+
   def handle_html_create
-    @session = find_session(current_user.id)
+    spot_id = session_params[:spot_id]
+
+    # a given spotname overrides selected spot
+    unless params["spotname"].blank?
+      spot_id = find_or_create_spot(params["spotname"]).id
+    end
+
+    @session = find_session(current_user.id, spot_id)
     unless @session.nil?
       redirect_to sessions_url, alert: "Session existiert schon"
       return
     end
 
     @session = Session.new(session_params)
+    @session.spot_id = spot_id
     @session.user = current_user
     if @session.save
       redirect_to sessions_url, notice: "Session erfolgreich veröffentlicht"
     else
-      render :new, status: :unprocessable_entity
+      redirect_to sessions_url, alert:  "Spot wählen oder eingeben"
     end
   end
 
   def handle_json_create
-    @session = find_session(@user.id)
+    @session = find_session(@user.id, session_params[:spot_id])
     if @session.nil?
       @session = Session.new(session_params)
       @session.user = @user
@@ -83,9 +96,9 @@ class SessionsController < ApplicationController
     end
   end
 
-  def find_session(user_id)
+  def find_session(user_id, spot_id)
     date = session_params[:when].to_date
-    Session.where(["spot_id = ? AND \"when\" = ? and user_id = ? and sport = ?", session_params[:spot_id], date, user_id, session_params[:sport]]).order(when: :desc).first
+    Session.where(["spot_id = ? AND \"when\" = ? and user_id = ? and sport = ?", spot_id, date, user_id, session_params[:sport]]).order(when: :desc).first
   end
 
   # PATCH/PUT /sessions/1 or /sessions/1.json
