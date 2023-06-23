@@ -11,6 +11,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
+    login(users(:ralf))
     get new_session_url
     assert_response :success
   end
