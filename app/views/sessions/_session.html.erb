@@ -1,41 +1,27 @@
-<div class="box" id="<%= dom_id session %>">
-  <article class="media">
-    <div class="media-left">
-      <figure class="image is-64x64">
-        <%= image_tag "1024.png" %>
-      </figure>
-    </div>
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <strong>
-            <%= link_to "#{session.id}: #{session.sport} in #{session.spot.name} (#{session.spot.id}) by #{session.user.name}", session %>
-          </strong>
-          <br>
-          Visbility: <%= session.visibility %>
-          <br>
-          <%= time_tag session.when %><br>
-          Joined by:
-          <% unless session.users.empty? %>
-            <% session.memberships.each do |member| %>
-              <%= member.user.name %>
-            <% end %>
-          <% else %>
-            no one yet
-          <% end %>
-        </p>
-      </div>
-      <% if user_signed_in? %>
-        <div class="level-left">
-          <nav class="level is-mobile">
-            <% if !is_owner_or_member?(session) %>
-              <%= link_to "Join", memberships_path(session_id: session.id), data: { turbo_method: :post } %>
-            <% elsif !is_owner?(session) %>
-              <%= link_to "Leave", membership_path(current_membership(session)), data: { turbo_method: :delete } %>
-            <% end %>
-          </nav>
-        </div>
+<div id="<%= dom_id session %>">
+  <p>
+    <strong>
+      <%= link_to "#{session.id}: #{session.sport} in #{session.spot.name} (#{session.spot.id}) by #{session.user.name}", session %>
+    </strong>
+    <br>
+    Visbility: <%= session.visibility %>
+    <br>
+    <%= time_tag session.when %><br>
+    Joined by:
+    <% unless session.users.empty? %>
+      <% session.memberships.each do |member| %>
+        <%= member.user.name %>
       <% end %>
-    </div>
-  </article>
+    <% else %>
+      no one yet
+    <% end %>
+  </p>
+  <% if user_signed_in? %>
+    <% if !is_owner_or_member?(session) %>
+      <%= link_to "Join", memberships_path(session_id: session.id), data: { turbo_method: :post } %>
+    <% elsif !is_owner?(session) %>
+      <%= link_to "Leave", membership_path(current_membership(session)), data: { turbo_method: :delete } %>
+    <% end %>
+  <% end %>
 </div>
+

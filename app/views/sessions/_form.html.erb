@@ -1,72 +1,39 @@
-<h2 class="subtitle">Sessionplaner</h2>
-
-<p class="mb-4">
-  Plane Deine Session für einen bestimmten Tag und Spot. Deine Freunde sehen Deine
-  Sessions vom Typ <em>Friends</em>, können an diesen teilnehmen und aufgezeichnet Tracks hochladen.
-</p>
-
-<% unless flash.empty? %>
-  <% flash.each do |type, msg| %>
-    <article class="message <%= flash_class(type) %>">
-      <div class="message-body">
-        <%= msg %>
-      </div>
-    </article>
-  <% end %>
-<% end %>
+<p style="color: red"><%= alert %></p>
+<p style="color: green"><%= notice %></p>
 
 <%= form_with(model: session, id: "#{dom_id(session)}_form") do |form| %>
-  <div class="field">
-    <label class="label">Was planst Du an welchem Tag?</label>
-    <div class="control">
-        <div class="select">
-          <%= form.select :sport, %w[Freeride Wave Downwind], {}, { :class => "input" } %>
-      </div>
-    </div>
+  <div>
+    <%= form.label :sport %>
+    <%= form.select :sport, %w[Freeride Wave Downwind], {}, { :class => "input" } %>
   </div>
 
-  <div class="field">
-    <label class="label">Was planst Du an welchem Tag?</label>
-      <div class="control">
-        <%= form.date_field :when, class: "input", required: true %>
-      </div>
+  <div>
+    <%= form.label :when %>
+    <%= form.date_field :when, class: "input", required: true %>
   </div>
 
-  <div class="field">
-    <label class="label">Bekannter Spot?</label>
-    <div class="columns is-gapless">
-      <div class="column is-one-half">
-        <div class="select">
-          <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
-        </div>
-      </div>
-      <div class="column">
-      </div>
-    </div>
+  <div>
+    <%= form.label :where %>
+    <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
   </div>
 
-  <div class="field">
-    <label class="label">Oder neuer Spot?</label>
-    <div class="control">
-      <%= text_field_tag :spotname, {}, class: "input", placeholder: "Spotname" %>
-    </div>
+  <div>
+    <label>Neuer Spot</label>
+    <%= text_field_tag :spotname, {}, class: "input", placeholder: "Spotname" %>
   </div>
 
-  <div class="field">
-    <label class="label">Deine Session sehen nur Freunde oder alle?</label>
-    <div class="control">
-      <label class="radio">
-        <%= form.radio_button :visibility, 'private' %> Friends
-      </label>
-      <label class="radio">
-        <%= form.radio_button :visibility, 'public' %> Public
-      </label>
-    </div>
+  <div>
+    <label>Wer sieht Deine Session?</label>
+    <label>
+      <%= form.radio_button :visibility, 'private' %> Freunde
+    </label>
+    <label>
+      <%= form.radio_button :visibility, 'public' %> Alle
+    </label>
   </div>
-
-  <div class="control">
+  <p>
     <%= form.submit "Session einstellen", :class => "button" %>
-  </div>
+  </p>
 <% end %>
 
 

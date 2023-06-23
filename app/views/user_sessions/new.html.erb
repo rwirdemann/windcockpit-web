@@ -1,25 +1,13 @@
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-half">
-        <%= form_with url: login_path, scope: :user, :class => "box" do |form| %>
-          <div class="field">
-            <%= form.label :name, class: "label" %>
-            <div class="control">
-              <%= form.text_field :name, required: true, autofocus: true, class: "input" %>
-            </div>
-          </div>
-          <div class="field">
-            <%= form.label :password, class: "label" %>
-            <div class="control">
-              <%= form.password_field :password, required: true, class: "input" %>
-            </div>
-          </div>
-          <div class="control">
-            <%= form.submit "Sign In", class: "button is-primary" %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</section>
+<%= form_with url: login_path, scope: :user do |form| %>
+  <p>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true, autofocus: true %>
+  </p>
+  <p>
+    <%= form.label :password, class: "label" %>
+    <%= form.password_field :password, required: true %>
+  </p>
+  <p>
+    <%= form.submit "Sign In", class: "button is-primary" %>
+  </p>
+<% end %>

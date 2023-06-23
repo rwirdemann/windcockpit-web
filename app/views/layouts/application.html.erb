@@ -6,56 +6,29 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
   <%= javascript_importmap_tags %>
 </head>
 <body>
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <%= image_tag "logo-2.png", size: '32' %>
-      <strong class="is-size-5">Wingbuddies</strong>
-    </a>
-    <a role="button" id="burger-link" data-controller="hello" data-action="hello#greet" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <% if user_signed_in? %>
-        <%= link_to "Friends", friends_path, class: "navbar-item" %>
-        <%= link_to "Profile", users_path, class: "navbar-item" %>
-      <% end %>
-    </div>
+<header>
+  <h1>Wingbuddies</h1>
+  <nav>
+    <% if user_signed_in? %>
+      <%= link_to "Sessions", sessions_path %>
+      <%= link_to "Friends", friends_path, class: "navbar-item" %>
+      <%= link_to "Profile", users_path, class: "navbar-item" %>
+    <% end %>
 
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <% if user_signed_in? %>
-            <%= link_to "Logout " + current_user.name, logout_path, data: { turbo_method: :delete }, class: "button is-primary" %>
-          <% else %>
-            <%= link_to "Login", login_path, class: "button is-primary" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
-<section class="section">
-  <div class="container">
-    <%= yield %>
-  </div>
-</section>
+    <% if user_signed_in? %>
+      <%= link_to "Logout", logout_path, data: { turbo_method: :delete } %>
+    <% else %>
+      <%= link_to "Sessions", sessions_path %>
+      <%= link_to "Login", login_path %>
+    <% end %>
+  </nav>
+</header>
+<main>
+  <%= yield %>
+</main>
 </body>
-<script type="text/javascript"> <!-- add this for menu toggle button  -->
-(function () {
-    var burger = document.querySelector('.navbar-burger');
-    var menu = document.querySelector('#' + burger.dataset.target);
-    burger.addEventListener('click', function () {
-        burger.classList.toggle('is-active');
-        menu.classList.toggle('is-active');
-    });
-})();
-</script>
 </html>

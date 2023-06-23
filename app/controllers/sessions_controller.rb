@@ -57,7 +57,7 @@ class SessionsController < ApplicationController
     @session.spot_id = spot_id
     @session.user = current_user
     if @session.save
-      redirect_to sessions_url, notice: "Session erfolgreich veröffentlicht"
+      redirect_to sessions_url, notice: "Session veröffentlicht"
     else
       redirect_to sessions_url, alert:  "Spot wählen oder eingeben"
     end

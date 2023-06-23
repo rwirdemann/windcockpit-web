@@ -1,19 +1,11 @@
-<div class="columns">
-  <div class="column">
-    <div id="sessions">
-      <% @sessions.each do |session| %>
-        <%= render "session", session: session %>
-      <% end %>
-    </div>
-    <div class="mt-3">
-      <%== pagy_bulma_nav(@pagy) if @pagy.pages > 1 %>
-    </div>
-  </div>
-  <div class="column is-one-third">
-    <% if user_signed_in? %>
-      <%= render "form", session: Session.new(when: Date.today) %>
-    <% else %>
-      <%= render "about" %>
-    <% end %>
-  </div>
-</div>
+<aside class="sidebar">
+  <% if user_signed_in? %>
+    <%= render "form", session: Session.new(when: Date.today) %>
+  <% else %>
+    <%= render "about" %>
+  <% end %>
+</aside>
+<% @sessions.each do |session| %>
+  <%= render "session", session: session %>
+<% end %>
+<%== pagy_nav(@pagy) if @pagy.pages > 1 %>
