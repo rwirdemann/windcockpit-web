@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
     if current_user.nil?
       @sessions = Session.all.order(when: :desc).where('visibility = ?', 'public')
     else
-      @sessions = Session.all.order(when: :desc).where('visibility = ? OR user_id = ?', 'public', current_user.id)
+      friends = Friendship.where('friend_id = ?', current_user.id).map { |f| f.user_id }
+      @sessions = Session.all.order(when: :SELEdesc).where('visibility = ? OR user_id = ? or user_id in (?)', 'public', current_user.id, friends)
     end
     @pagy, @sessions = pagy(@sessions)
 

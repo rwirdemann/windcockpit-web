@@ -2,27 +2,27 @@
 <p style="color: green"><%= notice %></p>
 
 <%= form_with(model: session, id: "#{dom_id(session)}_form") do |form| %>
-  <div>
+  <p>
     <%= form.label :sport %>
     <%= form.select :sport, %w[Freeride Wave Downwind], {}, { :class => "input" } %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= form.label :when %>
     <%= form.date_field :when, class: "input", required: true %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <%= form.label :where %>
     <%= form.select :spot_id, @spots.map { |s| [s.name, s.id] } %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <label>Neuer Spot</label>
     <%= text_field_tag :spotname, {}, class: "input", placeholder: "Spotname" %>
-  </div>
+  </p>
 
-  <div>
+  <p>
     <label>Wer sieht Deine Session?</label>
     <label>
       <%= form.radio_button :visibility, 'private' %> Freunde
@@ -30,7 +30,7 @@
     <label>
       <%= form.radio_button :visibility, 'public' %> Alle
     </label>
-  </div>
+  </p>
   <p>
     <%= form.submit "Session einstellen", :class => "button" %>
   </p>
