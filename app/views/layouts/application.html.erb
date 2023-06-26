@@ -16,7 +16,7 @@
     <% if user_signed_in? %>
       <%= link_to "Sessions", sessions_path %>
       <%= link_to "Friends", friends_path, class: "navbar-item" %>
-      <%= link_to "Profile", users_path, class: "navbar-item" %>
+      <%= link_to "#{current_user.name.humanize}'s Profile", users_path, class: "navbar-item" %>
     <% end %>
 
     <% if user_signed_in? %>

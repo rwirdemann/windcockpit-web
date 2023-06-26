@@ -1,20 +1,29 @@
 <div class="flex-container">
   <div class="flex-item">
-    <h3>Friends</h3>
+    <h4><mark>Friends</mark></h4>
     <% @friendships.each do |friendship| %>
-      <p>
-      <strong><%= friendship.friend.name %></strong>
-      <%= link_to "Uninvite", friend_path(friendship), data: { turbo_method: :delete } %>
+      <div class="flex-container">
+        <div class="flex-item">
+          <strong><%= friendship.friend.name %></strong>
+        </div>
+        <div class="flex-item">
+          <%= link_to "Uninvite", friend_path(friendship), data: { turbo_method: :delete } %>
+        </div>
+      </div>
     <% end %>
     </p>
   </div>
   <div class="flex-item">
-    <h3>Not yet Friends</h3>
+    <h4><mark>Not yet Friends</mark></h4>
     <% @users.each do |user| %>
-      <p>
-        <strong><%= user.name %></strong>
-        <%= link_to "Invite", friends_path(id: user.id), data: { turbo_method: :post } %>
-      </p>
+      <div class="flex-container">
+        <div class="flex-item">
+          <strong><%= user.name %></strong>
+        </div>
+        <div class="flex-item">
+          <%= link_to "Invite", friends_path(id: user.id), data: { turbo_method: :post } %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>
