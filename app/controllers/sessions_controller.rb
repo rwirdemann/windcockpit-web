@@ -139,7 +139,7 @@ class SessionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def session_params
-    params.require(:session).permit(:sport, :spot_id, :when, :duration, :distance, :maxspeed, :visibility)
+    params.require(:session).permit(:sport, :user_id, :spot_id, :when, :duration, :distance, :maxspeed, :visibility)
   end
 
   def validate_apikey?
