@@ -14,7 +14,7 @@ end
 
 module SignInHelper
   def login_as(user)
-    post login_url(Hash("user" => Hash("name" => user.name, "password" => "password")))
+    post login_url params: { user: { name: user.name, password: "password" } }
   end
 end
 

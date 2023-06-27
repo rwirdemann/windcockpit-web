@@ -4,6 +4,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @session = sessions(:heiligenhafen)
+    @spot = spots(:heiligenhafen)
   end
 
   test "should get index" do
@@ -19,11 +20,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create session" do
+    login_as(users(:ralf))
+
     assert_difference("Session.count") do
-      post sessions_url, params: { session: { sport: @session.sport } }
+      post sessions_url, params: { session: { sport: @session.sport, spot_id: @spot.id, when: 5.days.from_now } }
     end
 
-    assert_redirected_to session_url(Session.last)
+    assert_redirected_to sessions_url
   end
 
   test "should show session" do
