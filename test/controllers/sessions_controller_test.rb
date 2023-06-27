@@ -3,7 +3,7 @@ require "test_helper"
 class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @session = sessions(:one)
+    @session = sessions(:heiligenhafen)
   end
 
   test "should get index" do

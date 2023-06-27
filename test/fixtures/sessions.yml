@@ -1,7 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+heiligenhafen:
+  sport: Downwind
+  spot: heiligenhafen
+  when: <%= 5.day.ago %>
 
-one:
-  sport: MyString
-
-two:
-  sport: MyString
+altenteil:
+  sport: wave
+  spot: altenteil
+  when: <%= 5.day.ago %>

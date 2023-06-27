@@ -1,7 +1,5 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+altenteil:
+  name: Altenteil
 
-one:
-  name: MyString
-
-two:
-  name: MyString
+heiligenhafen:
+  name: Heiligenhafen
