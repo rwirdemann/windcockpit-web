@@ -1,4 +1,4 @@
 ralf:
   name: ralf
-  password_digest: password
+  password_digest: $2a$12$AmU1OiYebRDEtMFohodlne9JjaKwZfutakC4ubLczC1eibjYUQ/gu
   apikey_digest: password
