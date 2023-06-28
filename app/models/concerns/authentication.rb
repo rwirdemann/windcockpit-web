@@ -4,6 +4,7 @@ module Authentication
   included do
     before_action :current_user
     helper_method :current_user
+    helper_method :owned_by?
     helper_method :user_signed_in?
   end
 
@@ -26,6 +27,10 @@ module Authentication
 
   def user_signed_in?
     Current.user.present?
+  end
+
+  def owned_by?(session)
+    Current.user.present? and Current.user == session.user
   end
 
   def authenticate_user!

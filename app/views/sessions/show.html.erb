@@ -26,7 +26,7 @@
     </ul>
   <% end %>
 </div>
-<% if user_signed_in? %>
+<% if owned_by?(@session) %>
   <div>
     <%= link_to "Edit", edit_session_path(@session) %> |
     <%= link_to "Delete", session_path(@session), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
